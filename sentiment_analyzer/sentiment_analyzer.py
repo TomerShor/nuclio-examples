@@ -9,7 +9,7 @@ import torch
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 import preprocessing
-from constants import Constants
+from common.constants import SENTIMENT_MAPPING
 
 
 def init_context(context):
@@ -25,16 +25,16 @@ def init_context(context):
 
 def handler(context, event):
     # parse the input text from the event body
-    input = event.body.decode().strip()
+    input_text = event.body.decode().strip()
 
-    context.logger.info(f"Received input text: {input}")
+    context.logger.info(f"Received input text: {input_text}")
 
     # call the sentiment function
-    predicted_sentiment = _predict_text_sentiment(context.user_data.tokenizer, context.user_data.model, input)
+    predicted_sentiment = _predict_text_sentiment(context.user_data.tokenizer, context.user_data.model, input_text)
 
     # return the sentiment
     body = {
-        "input_text": input,
+        "input_text": input_text,
         "predicted_sentiment": predicted_sentiment
     }
     return context.Response(
@@ -63,5 +63,5 @@ def _predict_text_sentiment(tokenizer, sentiment_model, input_text):
     predicted_class_sentiment = torch.argmax(logits, dim=1).item()
 
     # Map the sentiment label to a rating
-    predicted_label_sentiment = Constants.SENTIMENT_MAPPING[predicted_class_sentiment]
+    predicted_label_sentiment = SENTIMENT_MAPPING[predicted_class_sentiment]
     return predicted_label_sentiment
