@@ -1,10 +1,21 @@
-SENTIMENT_MAPPING = {
-    0: "very negative ",
-    1: "negative",
-    2: "neutral",
-    3: "positive",
-    4: "very positive"
-}
+import enum
+
+
+class SentimentMapping(enum.Enum):
+    VERY_NEGATIVE = 0
+    NEGATIVE = 1
+    NEUTRAL = 2
+    POSITIVE = 3
+    VERY_POSITIVE = 4
+
+    @classmethod
+    def to_str(cls, sentiment):
+        return cls(sentiment).name.lower().replace("_", " ")
+
+    def to_lower(self):
+        return self.name.lower().replace("_", " ")
+
+
 WIKIPEDIA = "Wikipedia"
 
 

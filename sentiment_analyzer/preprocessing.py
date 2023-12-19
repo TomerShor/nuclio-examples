@@ -3,6 +3,7 @@ class Tokenizer(object):
         self.tokenizer_function = tokenizer_function
 
     def tokenize(self, text, **kwargs):
+        text = text.lower()
         return self.tokenizer_function(
             text,
             **kwargs
