@@ -4,7 +4,7 @@ import unittest
 import nuclio_sdk
 import sys
 
-import sentiment_analyzer
+import sentiment_analyzer.sentiment_analyzer as sentiment_analyzer
 from common.constants import SentimentMapping
 
 

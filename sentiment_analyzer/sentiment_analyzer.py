@@ -7,7 +7,7 @@ The function receives a text input and returns the predicted sentiment of the te
 import os
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-import preprocessing
+import sentiment_analyzer.preprocessing as preprocessing
 from common.constants import SentimentMapping
 
 
